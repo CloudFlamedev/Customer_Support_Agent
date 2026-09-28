@@ -1,0 +1,27 @@
+triage_task:
+  description: >
+    Classify the support ticket below.
+
+    <ticket>
+    Ticket ID: {ticket_id}
+    Subject: {subject}
+    Body: {body}
+    </ticket>
+
+    Rules:
+    - category must be exactly one of: billing, technical, account, legal,
+      security, refund_dispute, other.
+    - Use refund_dispute when the customer disagrees with a refund decision.
+    - Use legal for lawyers, lawsuits, regulators, or data deletion demands.
+    - Use security for hacked accounts, unauthorized access, or a lost
+      two-factor device.
+    - priority is an integer: 1 = urgent (money lost, account hacked, fully
+      locked out), 2 = high (angry customer or blocked service), 3 = normal
+      question, 4 = low (no action needed).
+    - sentiment must be exactly one of: calm, frustrated, angry.
+    - summary is one sentence and must not contain emails, phone numbers,
+      or card numbers.
+  expected_output: >
+    Only one JSON object with exactly these keys: category, priority,
+    sentiment, summary. No markdown, no code fences, no extra text.
+  agent: triage_agent

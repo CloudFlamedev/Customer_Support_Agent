@@ -1,0 +1,9 @@
+crewai>=0.100.0
+chromadb
+sentence-transformers
+fastapi
+uvicorn
+pydantic-settings
+python-dotenv
+tenacity
+pytest

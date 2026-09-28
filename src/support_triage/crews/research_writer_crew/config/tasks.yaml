@@ -1,0 +1,52 @@
+research_task:
+  description: >
+    A customer sent this ticket:
+
+    <ticket>
+    Subject: {subject}
+    Body: {body}
+    </ticket>
+
+    Use the search_knowledge_base tool ONCE with a short, plain-language
+    question based on the ticket, to find relevant passages. Return exactly
+    what the tool gives you, including source file names and scores. If the
+    tool returns NO_RESULTS, say "NO_RESULTS" and nothing else.
+  expected_output: >
+    The raw passages found (with sources and scores), or the text
+    "NO_RESULTS".
+  agent: research_agent
+
+writer_task:
+  description: >
+    A customer sent this ticket:
+
+    <ticket>
+    Subject: {subject}
+    Body: {body}
+    </ticket>
+
+    Passages found in the knowledge base are provided above from the
+    research step.
+
+    Rules:
+    - Use ONLY facts stated in the passages. Never invent policy details,
+      dates, amounts, or promises.
+    - If the passages do not answer the question, or say "NO_RESULTS", write
+      a short honest reply saying you could not find a confident answer and
+      that a specialist will follow up. Set self_score to 0.
+    - Keep the reply under 120 words. Friendly, professional, no sign-off
+      line needed.
+    - self_score is a number from 0 to 1: how fully the passages answer the
+      customer's actual question. 1.0 = fully and directly answered.
+      0.0 = not answered at all.
+    - sources is a list of the KB file names you actually used (empty list
+      if none).
+
+    Output ONLY one JSON object with exactly these keys: reply, sources,
+    self_score. No markdown, no code fences, no extra text before or after
+    the JSON.
+  expected_output: >
+    One JSON object: {"reply": "...", "sources": ["..."], "self_score": 0.0}
+  agent: writer_agent
+  context:
+    - research_task
