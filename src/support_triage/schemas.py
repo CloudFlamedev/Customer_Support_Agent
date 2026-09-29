@@ -34,6 +34,13 @@ class DraftReply(BaseModel):
     self_score: float = Field(ge=0, le=1, description="Does the reply fully answer using sources?")
 
 
+class GuardrailResult(BaseModel):
+    passed: bool
+    reasons: list[str] = Field(default_factory=list)
+    pii_types: list[str] = Field(default_factory=list)
+    masked_text: str | None = None
+
+
 class Decision(BaseModel):
     action: Literal["auto_send", "human_review"]
     confidence: float
