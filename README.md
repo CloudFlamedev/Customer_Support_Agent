@@ -50,12 +50,19 @@ flowchart TD
     end
     E -.searches.-> N
 
-    style B fill:#fff3cd,stroke:#856404
-    style G fill:#fff3cd,stroke:#856404
-    style H fill:#f8d7da,stroke:#721c24
-    style K fill:#d4edda,stroke:#155724
-    style D fill:#fff3cd,stroke:#856404
-    style J fill:#fff3cd,stroke:#856404
+    classDef guardrail fill:#7a5c00,stroke:#ffd257,stroke-width:2px,color:#fff
+    classDef decision fill:#5a4a00,stroke:#ffd257,stroke-width:2px,color:#fff
+    classDef human fill:#7a1f2b,stroke:#ff8a95,stroke-width:2px,color:#fff
+    classDef success fill:#1e5c33,stroke:#6ee89a,stroke-width:2px,color:#fff
+    classDef store fill:#233,stroke:#8ab4f8,stroke-width:2px,color:#fff
+    classDef agent fill:#1f2937,stroke:#93c5fd,stroke-width:2px,color:#fff
+
+    class B,G guardrail
+    class D,J decision
+    class H,L human
+    class K success
+    class M,N store
+    class A,C,E,F,KB agent
 ```
 
 **Key design choices visible in the diagram:**
